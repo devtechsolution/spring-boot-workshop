@@ -1,0 +1,1 @@
+insert into TICKET  values (1, now(),'Blr', 'aditya5srivastva@gmail.com', 'aditya', 'Delhi');
