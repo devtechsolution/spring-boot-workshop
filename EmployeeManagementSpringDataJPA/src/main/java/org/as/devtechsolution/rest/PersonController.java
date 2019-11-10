@@ -20,50 +20,58 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value="/api")
 public class PersonController {
-	
+
 	@Autowired
 	private PersonService personService;
-	
+
 	@PostMapping(value="/person")
 	public ResponseEntity<Person> savePerson(@RequestBody Person person){
-		
+
 		return new ResponseEntity<Person>(personService.createPerson(person), HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping(value="/persons")
 	public ResponseEntity<List<Person>> getPersonById(@RequestBody List<Person> persons){
 		List<Person> personList = (List<Person>) personService.createPersons(persons);
 		return new ResponseEntity<List<Person>>(personList,HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping(value="/persons/{ids}")
 	public ResponseEntity<List<Person>> getPersonsByIds(@PathVariable List<Integer> ids){
-		
-		/*
-		 * List<Integer> ids=new ArrayList<>(); strids.forEach(id->{
-		 * ids.add(Integer.valueOf(id)); });
-		 */
-		
+
 		Iterable<Person> personByIds = personService.getPersonByIds(ids);
-		
-		
 		return new ResponseEntity<List<Person>>((List<Person>) personByIds, HttpStatus.OK) ;
 	}
-	
+
 	@DeleteMapping(value="persons")
 	public ResponseEntity<Void> deletePerson(@RequestBody Person person) {
+
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
+
 	@PutMapping(value="/persons/{id}/{email:.+}")
 	public ResponseEntity<Void>  updatePersonEmailById(@PathVariable("id") Integer id, 
 			@PathVariable("email") String  email) {
+
 		personService.updatePersonEmailById(id, email);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
-	
-	
-	
+
+	@GetMapping(value="/persons/lastName/{lastName}")
+	public ResponseEntity<List<Person>> findByLastName(@PathVariable("lastName") String lastName){
+
+		return new ResponseEntity<List<Person>>(personService.findByLastName(lastName), HttpStatus.OK);
+	}
+
+	@GetMapping(value="/persons/{firstName}/{email:.+}")
+	public ResponseEntity<List<Person>> findByFirstNameAndEmail(@PathVariable("firstName")String firstName,@PathVariable("email") String email){
+
+		return new ResponseEntity<List<Person>>(personService.findByFirstNameAndEmail(firstName, email), HttpStatus.OK);
+
+	}
+
+
+
+
 
 }

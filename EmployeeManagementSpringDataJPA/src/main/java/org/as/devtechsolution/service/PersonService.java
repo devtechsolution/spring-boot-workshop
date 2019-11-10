@@ -14,4 +14,8 @@ public interface PersonService {
 	public void deletePersonEntity(Person person);
 
 	public void updatePersonEmailById(int id, String newEmail) ;
+	
+	List<Person> findByLastName(String lastName);
+	
+	List<Person> findByFirstNameAndEmail(String firstName,String email);
 }
