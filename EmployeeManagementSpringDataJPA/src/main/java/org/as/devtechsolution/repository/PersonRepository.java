@@ -8,6 +8,10 @@ import org.springframework.data.repository.CrudRepository;
 public interface PersonRepository extends CrudRepository<Person, Integer> {
 	
 	List<Person> findByLastName(String lastName);
+	List<Person> getByLastName(String lastName);
+	
 	List<Person> findByFirstNameAndEmail(String firstName,String email);
+	List<Person> getByFirstNameAndEmail(String firstName,String email);
+	
 
 }

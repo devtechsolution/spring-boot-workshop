@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -16,6 +18,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="person_table")
+@NamedQueries(value = { 
+		@NamedQuery(name = "Person.getByLastName", 
+				query = "SELECT p FROM Person p WHERE p.lastName=?1"),
+		@NamedQuery(name = "Person.getByFirstNameAndEmail", 
+		query = "SELECT p FROM Person p WHERE p.firstName=?1 AND email=?2")
+		
+})
 public class Person {
 
 	@Id

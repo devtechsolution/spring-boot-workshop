@@ -48,12 +48,14 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<Person> findByLastName(String lastName) {
-		return personRepo.findByLastName(lastName);
+		//return personRepo.findByLastName(lastName);
+		return personRepo.getByLastName(lastName);
 	}
 
 	@Override
 	public List<Person> findByFirstNameAndEmail(String firstName, String email) {
-		return personRepo.findByFirstNameAndEmail(firstName, email);
+		//return personRepo.findByFirstNameAndEmail(firstName, email);
+		return personRepo.getByFirstNameAndEmail(firstName, email);
 	}
 
 }
